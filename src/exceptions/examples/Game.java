@@ -46,8 +46,6 @@ public class Game {
                 }
             }
         }
-
-        throw new IndexOutOfBoundsException("IndexOutOfBoundsException throw just because");
     }
 
     private void saveScore() throws SaveScoreException {
