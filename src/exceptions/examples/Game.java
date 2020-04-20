@@ -18,11 +18,11 @@ public class Game {
             saveScore();
             saveStatistics();
         } catch(SaveProgressException ex){
-            System.err.println("Can't save Progress" + ex.getMessage());
+            System.err.println("Can't save Progress " + ex.getMessage());
         } catch (SaveScoreException ex) {
-            System.err.println("Can't save Score" + ex.getMessage());
+            ex.printStackTrace();
         } catch (SaveStatisticsException ex) {
-            System.err.println("Can't save Statistics" + ex.getMessage());
+            System.err.println("Can't save Statistics " + ex.getMessage());
         }
     }
 
@@ -35,6 +35,8 @@ public class Game {
             writer = new FileWriter(NAME_STATISTICS,true);
 
             writer.append("Guardado: ").append(now.format(formatter)).append(System.lineSeparator());
+
+            writer.close();
         } catch (IOException e) {
             throw new SaveStatisticsException();
         } finally {
@@ -57,8 +59,12 @@ public class Game {
             writer = new FileWriter(NAME_SCORE,true);
 
             writer.append("Guardado: ").append(now.format(formatter)).append(System.lineSeparator());
+
+            writer.close();
+
+            throw new IOException("IO exception de prueba");
         } catch (IOException e) {
-            throw new SaveScoreException();
+            throw new SaveScoreException("Send Help", e);
         } finally {
             if(writer != null) {
                 try {
@@ -79,6 +85,8 @@ public class Game {
             writer = new FileWriter(NAME_PROGRESS,true);
 
             writer.append("Guardado: ").append(now.format(formatter)).append(System.lineSeparator());
+
+            writer.close();
         } catch (IOException e) {
             throw new SaveProgressException();
         } finally {
