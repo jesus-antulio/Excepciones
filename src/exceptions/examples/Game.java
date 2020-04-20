@@ -27,76 +27,43 @@ public class Game {
     }
 
     private void saveStatistics() throws SaveStatisticsException {
-        FileWriter writer = null;
-        try {
+
+        try (FileWriter writer = new FileWriter(NAME_STATISTICS,true)){
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE);
 
-            writer = new FileWriter(NAME_STATISTICS,true);
-
             writer.append("Guardado: ").append(now.format(formatter)).append(System.lineSeparator());
 
-            writer.close();
         } catch (IOException e) {
             throw new SaveStatisticsException();
-        } finally {
-            if(writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException e) {
-
-                }
-            }
         }
     }
 
     private void saveScore() throws SaveScoreException {
-        FileWriter writer = null;
-        try {
+
+        try (FileWriter writer = new FileWriter(NAME_SCORE,true)){
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE);
 
-            writer = new FileWriter(NAME_SCORE,true);
 
             writer.append("Guardado: ").append(now.format(formatter)).append(System.lineSeparator());
-
-            writer.close();
 
             throw new IOException("IO exception de prueba");
         } catch (IOException e) {
             throw new SaveScoreException("Send Help", e);
-        } finally {
-            if(writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException e) {
-
-                }
-            }
         }
     }
 
     private void saveProgress() throws SaveProgressException {
-        FileWriter writer = null;
-        try {
+
+        try (FileWriter writer = new FileWriter(NAME_PROGRESS,true)){
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE);
 
-            writer = new FileWriter(NAME_PROGRESS,true);
-
             writer.append("Guardado: ").append(now.format(formatter)).append(System.lineSeparator());
 
-            writer.close();
         } catch (IOException e) {
             throw new SaveProgressException();
-        } finally {
-            if(writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException e) {
-
-                }
-            }
         }
     }
 }
